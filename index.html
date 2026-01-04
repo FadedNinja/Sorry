@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Sorry, I Love You ❤️</title>
+    <style>
+        :root {
+            --color-primary: #ff4b6a;
+            --color-secondary: #ff6b85;
+            --color-bg: linear-gradient(135deg, #ffe5e5 0%, #ffd9e0 50%, #ffe5e5 100%);
+            --color-card: #ffffff;
+            --color-text: #2d2d2d;
+            --color-text-light: #666666;
+            --color-accent: #ff1744;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--color-bg);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .hearts-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            opacity: 0.15;
+            animation: float-up 6s infinite ease-in;
+            font-size: 2rem;
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.15;
+            }
+            90% {
+                opacity: 0.15;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 520px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card {
+            background: var(--color-card);
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 15px 40px rgba(255, 75, 106, 0.15);
+            animation: card-appear 0.6s ease-out;
+        }
+
+        @keyframes card-appear {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 1.95rem;
+            color: var(--color-text);
+            margin-bottom: 12px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .emoji-big {
+            display: block;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .message-box {
+            background: linear-gradient(135deg, rgba(255, 107, 133, 0.08), rgba(255, 75, 106, 0.05));
+            border-left: 4px solid var(--color-primary);
+            padding: 16px;
+            border-radius: 8px;
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+
+        .message-box p {
+            color: var(--color-text);
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        p {
+            color: var(--color-text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .section-title {
+            color: var(--color-text);
+            font-weight: 600;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .reasons {
+            list-style: none;
+            margin: 16px 0 24px 0;
+        }
+
+        .reasons li {
+            padding: 12px 0;
+            padding-left: 28px;
+            position: relative;
+            color: var(--color-text);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            border-bottom: 1px solid rgba(255, 75, 106, 0.1);
+        }
+
+        .reasons li:last-child {
+            border-bottom: none;
+        }
+
+        .reasons li:before {
+            content: "💕";
+            position: absolute;
+            left: 0;
+            font-size: 1.1rem;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        button {
+            padding: 14px 24px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            box-shadow: 0 8px 20px rgba(255, 75, 106, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(255, 75, 106, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 75, 106, 0.1);
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 75, 106, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .response-box {
+            background: linear-gradient(135deg, rgba(255, 75, 106, 0.12), rgba(255, 107, 133, 0.08));
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 24px;
+            text-align: center;
+            animation: slide-in 0.4s ease-out;
+        }
+
+        @keyframes slide-in {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .response-box p {
+            color: var(--color-text);
+            font-size: 1rem;
+            margin: 8px 0;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: var(--color-primary);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .hearts-floating {
+            font-size: 1.5rem;
+            animation: bounce 0.8s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 24px;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            .message-box {
+                padding: 12px;
+            }
+
+            button {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts-bg" id="heartsBg"></div>
+
+    <div class="container">
+        <div class="card">
+            <span class="emoji-big">💔</span>
+            <h1>I'm So Sorry iqraa</h1>
+
+            <div class="message-box">
+                <p>I know Aaj kl me jaldi so ja rha hu. But please please smjho - I didn't lose interest in you. Not even for a second.</p>
+            </div>
+
+            <p>Pta nhi aaj kl kya ho rha h mujhe kese so ja rha hu itni jaldi. But me bohot bohot zyada pyaar krta hu tumsee. You mean everything to me.</p>
+
+            <div class="section-title">Why I could never lose interest in you(isse bohot zyada reasons h but saare yha aa nhi payege):</div>
+            <ul class="reasons">
+                <li>Tumhare notification ko dekh kr hi me khush ho jata hur</li>
+                <li>Tumhara sath baat kiye bina mera din hi nhi kat ta h poora time to wait krta hu tere message ka </li>
+                <li>Jb jb tum mujhe I love you bolti ho tb tb butterflies aati h mujhe </li>
+                <li>Tumhara ulti seedhi harkate krna jese billu ki aawaz nikalna aur gaame gaana itna accha lgta h mujhe me explain bhi nhi kr skta</li>
+                <li>Jab tumhare sath hota hu even virtually kisi aur cheez ka mann nhi hota</li>
+                <li>Tumhare sath har ek moment special lgta h koi aesa kbhi hota hi nhi h ke mujhe interest hi na ho</li>
+            </ul>
+
+            <div class="message-box">
+                <p><strong>pakka walaaa promise:</strong> me ab tumko aesa feel hi nhi hone duga ke tumko aesa lge ki interest nhi h aur agr tumko lg jaye fir bhi to babu please bta dena kyuki baat nhi krogi to mere baccho ka baap kese bnogi.</p>
+            </div>
+
+            <div class="button-group">
+                <button class="btn-primary" onclick="showForgivenessMessage()">
+                    Tap here if you forgive me 💕
+                </button>
+                <button class="btn-secondary" onclick="showAlternative()">
+                    I need to think about it
+                </button>
+            </div>
+
+            <div id="forgivenessMessage" class="hidden">
+                <div class="response-box">
+                    <span class="hearts-floating">💕 💕 💕</span>
+                    <p><strong>thank you iqraaaa!</strong></p>
+                    <p>Tum bs btao mujhe kya krna h me sb kuch krne ko ready hu tere liye. 🌹</p>
+                    <p style="margin-top: 16px; font-size: 0.9rem;">I love you so much. ❤️</p>
+                </div>
+            </div>
+
+            <div id="thinkingMessage" class="hidden">
+                <div class="response-box">
+                    <p>Soch le jitna sochna h but biwi to meri hi bnegi tu. 🤍</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Generate floating hearts in background
+        function createFloatingHearts() {
+            const heartsBg = document.getElementById('heartsBg');
+            const hearts = ['❤️', '💕', '💖', '💗'];
+            
+            for (let i = 0; i < 8; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                heartsBg.appendChild(heart);
+            }
+        }
+
+        function showForgivenessMessage() {
+            document.getElementById('forgivenessMessage').classList.remove('hidden');
+            document.getElementById('thinkingMessage').classList.add('hidden');
+            createConfetti();
+        }
+
+        function showAlternative() {
+            document.getElementById('thinkingMessage').classList.remove('hidden');
+            document.getElementById('forgivenessMessage').classList.add('hidden');
+        }
+
+        function createConfetti() {
+            for (let i = 0; i < 30; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * window.innerWidth + 'px';
+                confetti.style.top = '-10px';
+                confetti.style.backgroundColor = ['#ff4b6a', '#ff6b85', '#ff1744'][Math.floor(Math.random() * 3)];
+                document.body.appendChild(confetti);
+                
+                const duration = 2 + Math.random();
+                confetti.animate([
+                    { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                    { transform: `translateY(${window.innerHeight}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+                ], {
+                    duration: duration * 1000,
+                    easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                });
+
+                setTimeout(() => confetti.remove(), duration * 1000);
+            }
+        }
+
+        // Initialize floating hearts on page load
+        window.addEventListener('load', createFloatingHearts);
+    </script>
+</body>
+</html>
